@@ -415,12 +415,13 @@ public class Tool {
     int width = Integer.parseInt(tokens[1].replaceAll("[^0-9]", ""));
     int height = Integer.parseInt(tokens[2].replaceAll("[^0-9]", ""));
     
+
     // 영화관 모드에서는 영상을 제외한 부분도 width로 잡힘으로 width 감소 처리
     if (width > 1600) {
       width = 1250;
       height = 703;
     }
-    
+
     // 크기 계산
     double rateper = (float)resizeWidth/width;
     width = (int)(width * rateper);
@@ -442,9 +443,15 @@ public class Tool {
   /**
    * 파일 저장 메인 폴더
    * 예)
+<<<<<<< HEAD
+   * C:/kd/deploy/resort/contents/storage
+   * C:/kd/deploy/resort/member/storage
+   * C:/kd/deploy/resort/product/storage
+=======
    * C:/kd/deploy/blog_food/contents/storage
    * C:/kd/deploy/blog_food/member/storage
    * C:/kd/deploy/blog_food/product/storage
+>>>>>>> b3d90955e495ec5a551e6501d6031ae52f33ca1d
    * @return
    */
   public static String getUploadDir() {
@@ -452,9 +459,16 @@ public class Tool {
     String path = "";
 
     if (osName.contains("win")) { // Windows
-      path = "C:\\kd\\deploy\\blog_food\\";
+      path = "C:\\kd\\deploy\\resort\\";
       // System.out.println("Windows: " + path);
     } else if (osName.contains("mac")) { // MacOS
+      path = "/Users/yourusername/deploy/resort/";
+      // System.out.println("MacOS: " + path);
+    } else{ // Linux
+      path = "/home/ubuntu/deploy/resort/";
+      path = "C:\\kd\\deploy\\blog_food\\";
+      // System.out.println("Windows: " + path);
+    }  if (osName.contains("mac")) { // MacOS
       path = "/Users/yourusername/deploy/blog_food/";
       // System.out.println("MacOS: " + path);
     } else { // Linux
