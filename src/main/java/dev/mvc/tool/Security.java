@@ -69,6 +69,8 @@ public class Security {
     return enStr;
   }
  
+<<<<<<< HEAD
+=======
 //  // 복호화
 //  public String aesDecode(String str)
 //      throws java.io.UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException,
@@ -106,5 +108,6 @@ public class Security {
 // 
 //  }
  
+>>>>>>> b3d90955e495ec5a551e6501d6031ae52f33ca1d
 }
 
