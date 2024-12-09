@@ -64,12 +64,12 @@ public class NewsCateCont {
   
   @GetMapping(value="/create") //  http://localhost:9092/cate/create
   public String create(Model model) {
-    NewsVO newsVO = new NewsVO();
-    model.addAttribute("newsVO", newsVO);
+    NewsCateVO newscateVO = new NewsCateVO();
+    model.addAttribute("newscateVO", newscateVO);
     
-    newsVO.setGenre("장르");
-    newsVO.setName("카테고리 이름을 입력하세요."); // Form으로 초기값을 전달
-    return "/cate/create"; // /templates/cate/create.html
+    newscateVO.setGenre("장르");
+    newscateVO.setName("카테고리 이름을 입력하세요."); // Form으로 초기값을 전달
+    return "/newscate/create"; // /templates/cate/create.html
   }
   /**
    * 등록처리,  http://localhost:9092/cate/create
@@ -79,20 +79,20 @@ public class NewsCateCont {
    * @return
    */
   @PostMapping(value="/create")
-  public String create(Model model, @Valid @ModelAttribute("newsVO") NewsVO newsVO, BindingResult bindingResult) {
+  public String create(Model model, @Valid @ModelAttribute("newscateVO") NewsCateVO newscateVO, BindingResult bindingResult) {
  //   System.out.println("-> create post");
     if(bindingResult.hasErrors() == true) { // 에러가 있으면 폼으로 돌아갈 것.
    //   System.out.println("-> ERROR 발생");
-      return "/cate/create"; //templates/cate/create.html
+      return "/newscate/create"; //templates/cate/create.html
     }
     
-    newsVO.setGenre(newsVO.getGenre().trim());
-    newsVO.setName(newsVO.getName().trim());
+    newscateVO.setGenre(newscateVO.getGenre().trim());
+    newscateVO.setName(newscateVO.getName().trim());
     
 //    System.out.println(movieVO.getName());
 //    System.out.println(movieVO.getSeqno());
 //    System.out.println(movieVO.getVisible());
-    int cnt = this.newscateProc.create(newsVO);
+    int cnt = this.newscateProc.create(newscateVO);
     System.out.println("-> cnt :" + cnt);
     
     if (cnt ==1) {
@@ -100,14 +100,14 @@ public class NewsCateCont {
       //model.addAttribute("name", movieVO.getName());
       
       //return "redirect:/cate/list_all"; //  @GetMapping(value="/list_all")
-      return "redirect:/cate/list_search";
+      return "redirect:/newscate/list_search";
     } else {
       model.addAttribute("code", "create_fail");
     }
     
     model.addAttribute("cnt", cnt);
     
-    return "/cate/msg"; //templates/cate/msg.html
+    return "/newscate/msg"; //templates/cate/msg.html
   }
   
   /**
@@ -117,27 +117,27 @@ public class NewsCateCont {
    */
   @GetMapping(value="/list_all") 
   public String list_all(Model model) {
-    NewsVO newsVO = new NewsVO();
+    NewsCateVO newscateVO = new NewsCateVO();
     //movieVO.setGenre("분류");
     //movieVO.setName("카테고리 이름을 입력하세요.");
     
     //카테고리 그룹 목록
     ArrayList<String> list_genre = this.newscateProc.genreset();
-    newsVO.setGenre(String.join("/", list_genre));
+    newscateVO.setGenre(String.join("/", list_genre));
     
-    model.addAttribute("newsVO", newsVO);
+    model.addAttribute("newscateVO", newscateVO);
     
   
-    ArrayList<NewsVO> list = this.newscateProc.list_all();
+    ArrayList<NewsCateVO> list = this.newscateProc.list_all();
     model.addAttribute("list", list);
     
 //    ArrayList<MovieVO> menu = this.moviecateProc.list_all_categrp_y();
 //    model.addAttribute("menu", menu);
     
-    ArrayList<NewsVOMenu> menu = this.newscateProc.menu();
+    ArrayList<NewsCateVOMenu> menu = this.newscateProc.menu();
     model.addAttribute("menu", menu);
     
-    return "/cate/list_all"; // templates/cate/list_all.html
+    return "/newscate/list_all"; // templates/cate/list_all.html
   }
   
   /**
@@ -149,19 +149,19 @@ public class NewsCateCont {
   public String read(Model model, @PathVariable("newscateno") Integer newscateno,
                             @RequestParam(name="word", defaultValue = "") String word,
                             @RequestParam(name="now_page", defaultValue = "") int now_page) {
-    NewsVO newsVO = this.newscateProc.read(newscateno);
-    model.addAttribute("newsVO", newsVO);
+    NewsCateVO newscateVO = this.newscateProc.read(newscateno);
+    model.addAttribute("newscateVO", newscateVO);
     
 
     //ArrayList<MovieVO> list = this.moviecateProc.list_all();
     //ArrayList<MovieVO> list = this.moviecateProc.list_search(word);
-    ArrayList<NewsVO> list = this.newscateProc.list_search_paging(word, now_page, this.record_per_page);
+    ArrayList<NewsCateVO> list = this.newscateProc.list_search_paging(word, now_page, this.record_per_page);
     model.addAttribute("list", list);
     
 //  ArrayList<MovieVO> menu = this.moviecateProc.list_all_categrp_y();
 //  model.addAttribute("menu", menu);
   
-    ArrayList<NewsVOMenu> menu = this.newscateProc.menu();
+    ArrayList<NewsCateVOMenu> menu = this.newscateProc.menu();
     model.addAttribute("menu", menu);
     
     model.addAttribute("word", word);
@@ -178,7 +178,7 @@ public class NewsCateCont {
     int no = search_count - ((now_page - 1) * this.record_per_page);
     model.addAttribute("no", no);
     
-    return "/cate/read";
+    return "/newscate/read";
   }
   
   /**
@@ -192,18 +192,18 @@ public class NewsCateCont {
                                @RequestParam(name="now_page", defaultValue = "") int now_page) {
     
     if (this.memberProc.isMemberAdmin(session)) {
-      NewsVO newsVO = this.newscateProc.read(newscateno);
-      model.addAttribute("newsVO", newsVO);
+      NewsCateVO newscateVO = this.newscateProc.read(newscateno);
+      model.addAttribute("newscateVO", newscateVO);
       
 
       //ArrayList<MovieVO> list = this.moviecateProc.list_all();
-      ArrayList<NewsVO> list = this.newscateProc.list_search_paging(word, now_page, this.record_per_page);
+      ArrayList<NewsCateVO> list = this.newscateProc.list_search_paging(word, now_page, this.record_per_page);
       model.addAttribute("list", list);
       
 //    ArrayList<MovieVO> menu = this.moviecateProc.list_all_categrp_y();
 //    model.addAttribute("menu", menu);
     
-      ArrayList<NewsVOMenu> menu = this.newscateProc.menu();
+      ArrayList<NewsCateVOMenu> menu = this.newscateProc.menu();
       model.addAttribute("menu", menu);
       
     //카테고리 그룹 목록
@@ -224,7 +224,7 @@ public class NewsCateCont {
       int no = search_count - ((now_page - 1) * this.record_per_page);
       model.addAttribute("no", no);
       
-      return "/cate/update"; //templates/cate/update.html
+      return "/newscate/update"; //templates/cate/update.html
     } else {
       return "redirect:/member/login_cookie_need";  // redirect
     }
@@ -236,13 +236,13 @@ public class NewsCateCont {
   /**
    * 등록처리,  http://localhost:9092/cate/create
    * @param model Controller -> Thymleaf HTML로 데이터 전송에 사용
-   * @param NewsVO Form 태그 값-> 검증 -> cateVO 자동 저장, requestParameter() 자동 실행
+   * @param NewsCateVO Form 태그 값-> 검증 -> cateVO 자동 저장, requestParameter() 자동 실행
    * @param bindingResult 폼에 에러가 있는지 검사 지원
    * @return
    */
   @PostMapping(value="/update")
   public String update(HttpSession session, Model model, 
-                               @Valid @ModelAttribute("newsVO") NewsVO newsVO, 
+                               @Valid @ModelAttribute("newscateVO") NewsCateVO newscateVO, 
                                BindingResult bindingResult,
                                @RequestParam(name="word", defaultValue = "") String word,
                                @RequestParam(name="now_page", defaultValue = "") int now_page,
@@ -251,17 +251,17 @@ public class NewsCateCont {
       //   System.out.println("-> update post");
       if(bindingResult.hasErrors() == true) { // 에러가 있으면 폼으로 돌아갈 것.
      //   System.out.println("-> ERROR 발생");
-        return "/cate/update"; //templates/cate/update.html
+        return "/newscate/update"; //templates/cate/update.html
       }
       
 //      System.out.println(movieVO.getName());
 //      System.out.println(movieVO.getSeqno());
 //      System.out.println(movieVO.getVisible());
       
-      newsVO.setGenre(newsVO.getGenre().trim());
-      newsVO.setName(newsVO.getName().trim());
+      newscateVO.setGenre(newscateVO.getGenre().trim());
+      newscateVO.setName(newscateVO.getName().trim());
       
-      int cnt = this.newscateProc.update(newsVO);
+      int cnt = this.newscateProc.update(newscateVO);
       System.out.println("-> cnt :" + cnt);
       
       if (cnt ==1) {
@@ -272,7 +272,7 @@ public class NewsCateCont {
         ra.addAttribute("word", word);
         ra.addAttribute("now_page", now_page); // redirect로 데이터 전송
         
-        return "redirect:/cate/update/" + newsVO.getNewscateno();
+        return "redirect:/newscate/update/" + newscateVO.getNewscateno();
         
       } else {
         model.addAttribute("code", "update_fail");
@@ -293,7 +293,7 @@ public class NewsCateCont {
       model.addAttribute("no", no);
       // --------------------------------------------------------------------------------------
       
-      return "/cate/msg"; //templates/cate/msg.html
+      return "/newscate/msg"; //templates/cate/msg.html
     } else {
       return "redirect:/member/login_cookie_need";  // redirect
     }
@@ -311,18 +311,18 @@ public class NewsCateCont {
                             @RequestParam(name="word", defaultValue="") String word,
                             @RequestParam(name="now_page", defaultValue = "") int now_page) {
     if (this.memberProc.isMemberAdmin(session)) {
-      NewsVO newsVO = this.newscateProc.read(newscateno);
-      model.addAttribute("newsVO", newsVO);
+      NewsCateVO newscateVO = this.newscateProc.read(newscateno);
+      model.addAttribute("newscateVO", newscateVO);
       
 
       //ArrayList<MovieVO> list = this.moviecateProc.list_all();
-      ArrayList<NewsVO> list = this.newscateProc.list_search_paging(word, now_page, this.record_per_page);
+      ArrayList<NewsCateVO> list = this.newscateProc.list_search_paging(word, now_page, this.record_per_page);
       model.addAttribute("list", list);
       
 //    ArrayList<MovieVO> menu = this.moviecateProc.list_all_categrp_y();
 //    model.addAttribute("menu", menu);
     
-      ArrayList<NewsVOMenu> menu = this.newscateProc.menu();
+      ArrayList<NewsCateVOMenu> menu = this.newscateProc.menu();
       model.addAttribute("menu", menu);
       
       model.addAttribute("word", word);
@@ -340,7 +340,7 @@ public class NewsCateCont {
       int no = search_count - ((now_page - 1) * this.record_per_page);
       model.addAttribute("no", no);
       // ---------------
-      return "/cate/delete"; //templates/cate/delete.html
+      return "/newscate/delete"; //templates/cate/delete.html
     } else {
       return "redirect:/member/login_cookie_need";  // redirect
     }
@@ -351,7 +351,7 @@ public class NewsCateCont {
   /**
    * 삭제처리,  http://localhost:9092/cate/delete
    * @param model Controller -> Thymleaf HTML로 데이터 전송에 사용
-   * @param NewsVO Form 태그 값-> 검증 -> cateVO 자동 저장, requestParameter() 자동 실행
+   * @param NewsCateVO Form 태그 값-> 검증 -> cateVO 자동 저장, requestParameter() 자동 실행
    * @param bindingResult 폼에 에러가 있는지 검사 지원
    * @return
    */
@@ -364,14 +364,14 @@ public class NewsCateCont {
     if (this.memberProc.isMemberAdmin(session)) {
       System.out.println("-> delete_process");
       
-      NewsVO newsVO = this.newscateProc.read(newscateno); //삭제전에 삭제 결과를 출력할 레코드 조회
-      model.addAttribute("newsVO", newsVO);
+      NewsCateVO newscateVO = this.newscateProc.read(newscateno); //삭제전에 삭제 결과를 출력할 레코드 조회
+      model.addAttribute("newscateVO", newscateVO);
       
       this.newscateProc.deleteKorea(newscateno); // 자식 죽이기!!!
       
-      this.koreaProc.updateCntCount(newscateno); // 자식 죽이기
-      this.koreaProc.resetCnt(newscateno); // 자식 죽이기
-      this.koreaProc.updateCnt(newscateno); // 자식 죽이기
+      this.ContentsProc.updateCntCount(newscateno); // 자식 죽이기
+      this.ContentsProc.resetCnt(newscateno); // 자식 죽이기
+      this.ContentsProc.updateCnt(newscateno); // 자식 죽이기
       
       int cnt = this.newscateProc.delete(newscateno);
       System.out.println("-> cnt :" + cnt);
@@ -395,7 +395,7 @@ public class NewsCateCont {
         
         ra.addAttribute("now_page", now_page); // redirect로 데이터 전송
         
-        return "redirect:/cate/list_search";
+        return "redirect:/newscate/list_search";
         
       } else {
         model.addAttribute("code", "delete_fail");
@@ -403,7 +403,7 @@ public class NewsCateCont {
       
       model.addAttribute("cnt", cnt);
       
-      return "/cate/msg"; //templates/cate/msg.html
+      return "/newscate/msg"; //templates/newscate/msg.html
     } else {
       return "redirect:/member/login_cookie_need";  // redirect
     }
@@ -426,7 +426,7 @@ public class NewsCateCont {
     ra.addAttribute("word", word); // redirect로 데이터 전송
     ra.addAttribute("now_page", now_page); // redirect로 데이터 전송
     
-    return "redirect:/cate/list_search"; // @GetMapping(value="/list_all")
+    return "redirect:/newscate/list_search"; // @GetMapping(value="/list_all")
   }
   
   /**
@@ -444,7 +444,7 @@ public class NewsCateCont {
     ra.addAttribute("word", word); // redirect로 데이터 전송
     ra.addAttribute("now_page", now_page); // redirect로 데이터 전송
     
-    return "redirect:/cate/list_search"; // @GetMapping(value="/list_all")
+    return "redirect:/newscate/list_search"; // @GetMapping(value="/list_all")
   }
   
   /**
@@ -464,7 +464,7 @@ public class NewsCateCont {
       ra.addAttribute("word", word); // redirect로 데이터 전송
       ra.addAttribute("now_page", now_page); // redirect로 데이터 전송
       
-      return "redirect:/cate/list_search"; // @GetMapping(value="/list_all")
+      return "redirect:/newscate/list_search"; // @GetMapping(value="/list_all")
     
     } else {
       return "redirect:/member/login_cookie_need";  // redirect
@@ -489,7 +489,7 @@ public class NewsCateCont {
       ra.addAttribute("word", word); // redirect로 데이터 전송
       ra.addAttribute("now_page", now_page); // redirect로 데이터 전송
       
-      return "redirect:/cate/list_search"; // @GetMapping(value="/list_all")
+      return "redirect:/newscate/list_search"; // @GetMapping(value="/list_all")
     } else {
       return "redirect:/member/login_cookie_need";  // redirect
     }
@@ -550,25 +550,25 @@ public class NewsCateCont {
                                @RequestParam(name="word", defaultValue = "")String word,
                                @RequestParam(name="now_page", defaultValue="1") int now_page) {
     if (this.memberProc.isMemberAdmin(session)) {
-      NewsVO newsVO = new NewsVO();
+      NewsCateVO newscateVO = new NewsCateVO();
       //movieVO.setGenre("분류");
       //movieVO.setName("카테고리 이름을 입력하세요.");
       
       //카테고리 그룹 목록
       ArrayList<String> list_genre = this.newscateProc.genreset();
-      newsVO.setGenre(String.join("/", list_genre));
+      newscateVO.setGenre(String.join("/", list_genre));
       
-      model.addAttribute("newsVO", newsVO);
+      model.addAttribute("newscateVO", newscateVO);
       
       word = Tool.checkNull(word);
       
-      ArrayList<NewsVO> list = this.newscateProc.list_search_paging(word, now_page, this.record_per_page);
+      ArrayList<NewsCateVO> list = this.newscateProc.list_search_paging(word, now_page, this.record_per_page);
       model.addAttribute("list", list);
       
      // ArrayList<MovieVO> menu = this.moviecateProc.list_all_categrp_y();
      // model.addAttribute("menu", menu);
       
-      ArrayList<NewsVOMenu> menu = this.newscateProc.menu();
+      ArrayList<NewsCateVOMenu> menu = this.newscateProc.menu();
       model.addAttribute("menu", menu);
       
       int search_cnt = this.newscateProc.list_search_count(word);
@@ -589,7 +589,7 @@ public class NewsCateCont {
       model.addAttribute("no", no);
       // --------------------------------------------------------------------------------------    
       
-      return "/cate/list_search";  // /templates/cate/list_search.html
+      return "/newscate/list_search";  // /templates/cate/list_search.html
     } else {
       return "redirect:/member/login_cookie_need";  // redirect
     }

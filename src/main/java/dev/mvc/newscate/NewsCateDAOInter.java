@@ -3,7 +3,7 @@ package dev.mvc.newscate;
 import java.util.ArrayList;
 import java.util.Map;
 
-import dev.mvc.newscate.NewsVO;
+import dev.mvc.newscate.NewsCateVO;
 
 public interface NewsCateDAOInter {
   /** 
@@ -17,7 +17,7 @@ public interface NewsCateDAOInter {
    * @param movieVO
    * @return
    */
-   public int create(NewsVO newsVO);
+   public int create(NewsCateVO newscateVO);
    
    /**
     * 전체 목록
@@ -25,21 +25,21 @@ public interface NewsCateDAOInter {
     * select id="list_all" resultType="dev.mvc.Moviecate.MovieVO"
     * @return
     */
-   public ArrayList<NewsVO> list_all();
+   public ArrayList<NewsCateVO> list_all();
    
    /**
     * 조회
     * @param moviecateno
     * @return
     */
-   public NewsVO read(Integer newscateno);
+   public NewsCateVO read(Integer newscateno);
    
    /**
     * 수정
     * @param movieVO 수정할내용
     * @return 수정된 레코드 갯수
     */
-   public int update(NewsVO movieVO);
+   public int update(NewsCateVO newscateVO);
    
    /**
     * 삭제
@@ -84,7 +84,7 @@ public interface NewsCateDAOInter {
     * select id="list_all" resultType="dev.mvc.Moviecate.MovieVO"
     * @return
     */
-   public ArrayList<NewsVO> list_all_categrp_y();
+   public ArrayList<NewsCateVO> list_all_categrp_y();
    
    /**
     * 숨긴 카테고리 그룹을 제외하고 접속자에게 공개할 카테고리 그룹 출력
@@ -92,7 +92,7 @@ public interface NewsCateDAOInter {
     * select id="list_all" resultType="dev.mvc.Moviecate.MovieVO"
     * @return
     */
-   public ArrayList<NewsVO> list_all_cate_y(String genre);
+   public ArrayList<NewsCateVO> list_all_cate_y(String genre);
    
    /**
     * 장르 목록
@@ -100,7 +100,7 @@ public interface NewsCateDAOInter {
     */
    public ArrayList<String> genreset();
    
-   public ArrayList<NewsVO> list_search(String word);
+   public ArrayList<NewsCateVO> list_search(String word);
    
    /**
     * 검색 갯수
@@ -115,7 +115,7 @@ public interface NewsCateDAOInter {
     * @param map
     * @return
     */
-   public ArrayList<NewsVO> list_search_paging(Map<String, Object> map);
+   public ArrayList<NewsCateVO> list_search_paging(Map<String, Object> map);
    
  }
   
