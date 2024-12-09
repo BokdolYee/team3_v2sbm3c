@@ -69,7 +69,7 @@ public class NewsCateCont {
     
     newscateVO.setGenre("장르");
     newscateVO.setName("카테고리 이름을 입력하세요."); // Form으로 초기값을 전달
-    return "/newscate/create"; // /templates/cate/create.html
+    return "/cate/create"; // /templates/cate/create.html
   }
   /**
    * 등록처리,  http://localhost:9092/cate/create
@@ -83,7 +83,7 @@ public class NewsCateCont {
  //   System.out.println("-> create post");
     if(bindingResult.hasErrors() == true) { // 에러가 있으면 폼으로 돌아갈 것.
    //   System.out.println("-> ERROR 발생");
-      return "/newscate/create"; //templates/cate/create.html
+      return "/cate/create"; //templates/cate/create.html
     }
     
     newscateVO.setGenre(newscateVO.getGenre().trim());
@@ -100,14 +100,14 @@ public class NewsCateCont {
       //model.addAttribute("name", movieVO.getName());
       
       //return "redirect:/cate/list_all"; //  @GetMapping(value="/list_all")
-      return "redirect:/newscate/list_search";
+      return "redirect:/cate/list_search";
     } else {
       model.addAttribute("code", "create_fail");
     }
     
     model.addAttribute("cnt", cnt);
     
-    return "/newscate/msg"; //templates/cate/msg.html
+    return "/cate/msg"; //templates/cate/msg.html
   }
   
   /**
@@ -137,7 +137,7 @@ public class NewsCateCont {
     ArrayList<NewsCateVOMenu> menu = this.newscateProc.menu();
     model.addAttribute("menu", menu);
     
-    return "/newscate/list_all"; // templates/cate/list_all.html
+    return "/cate/list_all"; // templates/cate/list_all.html
   }
   
   /**
@@ -178,7 +178,7 @@ public class NewsCateCont {
     int no = search_count - ((now_page - 1) * this.record_per_page);
     model.addAttribute("no", no);
     
-    return "/newscate/read";
+    return "/cate/read";
   }
   
   /**
@@ -224,7 +224,7 @@ public class NewsCateCont {
       int no = search_count - ((now_page - 1) * this.record_per_page);
       model.addAttribute("no", no);
       
-      return "/newscate/update"; //templates/cate/update.html
+      return "/cate/update"; //templates/cate/update.html
     } else {
       return "redirect:/member/login_cookie_need";  // redirect
     }
@@ -251,7 +251,7 @@ public class NewsCateCont {
       //   System.out.println("-> update post");
       if(bindingResult.hasErrors() == true) { // 에러가 있으면 폼으로 돌아갈 것.
      //   System.out.println("-> ERROR 발생");
-        return "/newscate/update"; //templates/cate/update.html
+        return "/cate/update"; //templates/cate/update.html
       }
       
 //      System.out.println(movieVO.getName());
@@ -293,7 +293,7 @@ public class NewsCateCont {
       model.addAttribute("no", no);
       // --------------------------------------------------------------------------------------
       
-      return "/newscate/msg"; //templates/cate/msg.html
+      return "/cate/msg"; //templates/cate/msg.html
     } else {
       return "redirect:/member/login_cookie_need";  // redirect
     }
@@ -340,7 +340,7 @@ public class NewsCateCont {
       int no = search_count - ((now_page - 1) * this.record_per_page);
       model.addAttribute("no", no);
       // ---------------
-      return "/newscate/delete"; //templates/cate/delete.html
+      return "/cate/delete"; //templates/cate/delete.html
     } else {
       return "redirect:/member/login_cookie_need";  // redirect
     }
@@ -395,7 +395,7 @@ public class NewsCateCont {
         
         ra.addAttribute("now_page", now_page); // redirect로 데이터 전송
         
-        return "redirect:/newscate/list_search";
+        return "redirect:/cate/list_search";
         
       } else {
         model.addAttribute("code", "delete_fail");
@@ -403,7 +403,7 @@ public class NewsCateCont {
       
       model.addAttribute("cnt", cnt);
       
-      return "/newscate/msg"; //templates/newscate/msg.html
+      return "/cate/msg"; //templates/cate/msg.html
     } else {
       return "redirect:/member/login_cookie_need";  // redirect
     }
@@ -426,7 +426,7 @@ public class NewsCateCont {
     ra.addAttribute("word", word); // redirect로 데이터 전송
     ra.addAttribute("now_page", now_page); // redirect로 데이터 전송
     
-    return "redirect:/newscate/list_search"; // @GetMapping(value="/list_all")
+    return "redirect:/cate/list_search"; // @GetMapping(value="/list_all")
   }
   
   /**
@@ -444,7 +444,7 @@ public class NewsCateCont {
     ra.addAttribute("word", word); // redirect로 데이터 전송
     ra.addAttribute("now_page", now_page); // redirect로 데이터 전송
     
-    return "redirect:/newscate/list_search"; // @GetMapping(value="/list_all")
+    return "redirect:/cate/list_search"; // @GetMapping(value="/list_all")
   }
   
   /**
@@ -464,7 +464,7 @@ public class NewsCateCont {
       ra.addAttribute("word", word); // redirect로 데이터 전송
       ra.addAttribute("now_page", now_page); // redirect로 데이터 전송
       
-      return "redirect:/newscate/list_search"; // @GetMapping(value="/list_all")
+      return "redirect:/cate/list_search"; // @GetMapping(value="/list_all")
     
     } else {
       return "redirect:/member/login_cookie_need";  // redirect
@@ -489,7 +489,7 @@ public class NewsCateCont {
       ra.addAttribute("word", word); // redirect로 데이터 전송
       ra.addAttribute("now_page", now_page); // redirect로 데이터 전송
       
-      return "redirect:/newscate/list_search"; // @GetMapping(value="/list_all")
+      return "redirect:/cate/list_search"; // @GetMapping(value="/list_all")
     } else {
       return "redirect:/member/login_cookie_need";  // redirect
     }
@@ -589,7 +589,7 @@ public class NewsCateCont {
       model.addAttribute("no", no);
       // --------------------------------------------------------------------------------------    
       
-      return "/newscate/list_search";  // /templates/cate/list_search.html
+      return "/cate/list_search";  // /templates/cate/list_search.html
     } else {
       return "redirect:/member/login_cookie_need";  // redirect
     }
