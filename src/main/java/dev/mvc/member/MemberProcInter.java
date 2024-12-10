@@ -1,19 +1,20 @@
 package dev.mvc.member;
 
 import java.util.HashMap;
+import jakarta.servlet.http.HttpSession;
 
-public interface MemberDAOInter {
+public interface MemberProcInter {
   /**
    * 아이디 중복 검사
    * @param id
-   * @return
+   * @return 중복 아이디 개수
    */
   public int checkID(String id);
   
   /**
    * 닉네임 중복 검사
    * @param nickname
-   * @return
+   * @return 중복 닉네임 개수
    */
   public int checkNICKNAME(String nickname);
   
@@ -37,6 +38,13 @@ public interface MemberDAOInter {
    * @return
    */
   public MemberVO readByID(String id);
+  
+  /**
+   * 로그인된 회원 계정인지 검사
+   * @param session
+   * @return true: 사용자
+   */
+  public boolean isMember(HttpSession session);
 
   /**
    * 수정 처리
@@ -46,7 +54,7 @@ public interface MemberDAOInter {
   public int update(MemberVO memberVO);
   
   /**
-   * 회원 탈퇴 처리(아예 삭제가 아닌 등급을 탈퇴로 변경)
+   * 회원 탈퇴 처리(db에서 삭제가 아닌 등급을 탈퇴로 변경)
    * @param memberVO
    * @return
    */

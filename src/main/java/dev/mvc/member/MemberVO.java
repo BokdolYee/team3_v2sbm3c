@@ -1,9 +1,12 @@
 package dev.mvc.member;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
-@Setter @Getter
+@Setter @Getter @ToString
 public class MemberVO {
   /*
   memberno   NUMBER(7)      NOT NULL, -- 회원 번호, 레코드를 구분하는 컬럼, 기본키 
@@ -22,29 +25,50 @@ public class MemberVO {
    */
   
   /** 회원 번호 */
-  private int memberno;
+  private int memberno = 0;
+  
   /** 아이디(이메일) */
+  @NotEmpty(message="아이디 입력은 필수입니다.")
   private String id = "";
+  
   /** 비밀번호 */
+  @NotEmpty(message="비밀번호 입력은 필수입니다.")
   private String passwd = "";
+  
   /** 성명 */
+  @NotEmpty(message="이름 입력은 필수입니다.")
   private String name = "";
+  
   /** 생년월일 */
+  @NotEmpty(message="생년월일 입력은 필수입니다.")
   private String birth = "";
+  
   /** 닉네임 */
+  @NotEmpty(message="닉네임 입력은 필수입니다.")
+  @Size(min=2, max=12, message="닉네은 최소 2자에서 최대 12자입니다.")
   private String nickname = "";
+  
   /** 전화 번호 */
+  @NotEmpty(message="전화번호 입력은 필수입니다.")
   private String tel = "";
+  
   /** 성별 */
+  @NotEmpty(message="성별 선택은 필수입니다.")
   private String gender = "";
+  
   /** 우편 번호 */
+  @NotEmpty(message="우편번호 입력은 필수입니다.")
   private String zipcode = "";
+  
   /** 상세 주소 */
   private String address = "";
+  
   /** 작성 댓글수 */
   private int replycnt = 0;
+  
   /** 가입일 */
-  private String mdate = "";
+  private String rdate = "";
+  
   /** 등급 */
   private int grade = 0;
 
