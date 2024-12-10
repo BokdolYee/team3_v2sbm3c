@@ -16,25 +16,25 @@ public class NewsCateProc implements NewsCateProcInter {
   private NewsCateDAOInter cateDAO;
   
   @Override
-  public int create(NewsVO newsVO) {
+  public int create(NewsCateVO newsVO) {
     int cnt = this.cateDAO.create(newsVO);
     
   
     return cnt;
   }
   @Override
-  public ArrayList<NewsVO> list_all() {
-    ArrayList<NewsVO> list = this.cateDAO.list_all();
+  public ArrayList<NewsCateVO> list_all() {
+    ArrayList<NewsCateVO> list = this.cateDAO.list_all();
     return list;
   }
   @Override
-  public NewsVO read(Integer newscateno) {
-    NewsVO newsVO = this.cateDAO.read(newscateno);
-    return newsVO;
+  public NewsCateVO read(Integer newscateno) {
+    NewsCateVO newscateVO = this.cateDAO.read(newscateno);
+    return newscateVO;
   }
   @Override
-  public int update(NewsVO newsVO) {
-    int cnt = this.cateDAO.update(newsVO);
+  public int update(NewsCateVO newscateVO) {
+    int cnt = this.cateDAO.update(newscateVO);
     return cnt;
   }
   
@@ -76,35 +76,35 @@ public class NewsCateProc implements NewsCateProcInter {
   }
  
   @Override
-  public ArrayList<NewsVO> list_all_categrp_y() {
-    ArrayList<NewsVO> list = this.cateDAO.list_all_categrp_y();
+  public ArrayList<NewsCateVO> list_all_categrp_y() {
+    ArrayList<NewsCateVO> list = this.cateDAO.list_all_categrp_y();
     
       return list;
   }
   
   @Override
-  public ArrayList<NewsVO> list_all_cate_y(String genre) {
-    ArrayList<NewsVO> list = this.cateDAO.list_all_cate_y(genre);
+  public ArrayList<NewsCateVO> list_all_cate_y(String genre) {
+    ArrayList<NewsCateVO> list = this.cateDAO.list_all_cate_y(genre);
     
       return list;
   }
   @Override
-  public ArrayList<NewsVOMenu> menu() {
+  public ArrayList<NewsCateVOMenu> menu() {
     //대분류 + 중분류의 결합
-   ArrayList<NewsVOMenu> menu = new ArrayList<NewsVOMenu>();
+   ArrayList<NewsCateVOMenu> menu = new ArrayList<NewsCateVOMenu>();
     
-    ArrayList<NewsVO> genres = this.cateDAO.list_all_categrp_y();
-    for (NewsVO newsVO:genres) {
-      NewsVOMenu newsVOMenu = new NewsVOMenu();
+    ArrayList<NewsCateVO> genres = this.cateDAO.list_all_categrp_y();
+    for (NewsCateVO newscateVO:genres) {
+      NewsCateVOMenu NewscateVOMenu = new NewsCateVOMenu();
       
       //System.out.println(cateVO.getGenre());
-      newsVOMenu.setGenre(newsVO.getGenre()); //대분류명 저장
+      NewscateVOMenu.setGenre(newscateVO.getGenre()); //대분류명 저장
       
       // 카테고리 그룹(대분류)에 해당하는 카테고리 목록(중분류) 로딩
-      ArrayList<NewsVO> list_name = this.cateDAO.list_all_cate_y(newsVO.getGenre());
-      NewsVOMenu.setList_name(list_name);
+      ArrayList<NewsCateVO> list_name = this.cateDAO.list_all_cate_y(newscateVO.getGenre());
+      NewscateVOMenu.setList_name(list_name);
       
-      menu.add(newsVOMenu);
+      menu.add(NewscateVOMenu);
     }
     
     return menu;
@@ -119,8 +119,8 @@ public class NewsCateProc implements NewsCateProcInter {
   }
   
   @Override
-  public ArrayList<NewsVO> list_search(String word) {
-    ArrayList<NewsVO> list = this.cateDAO.list_search(word);
+  public ArrayList<NewsCateVO> list_search(String word) {
+    ArrayList<NewsCateVO> list = this.cateDAO.list_search(word);
     return list;
   }
   @Override
@@ -130,7 +130,7 @@ public class NewsCateProc implements NewsCateProcInter {
   }
   
   @Override
-  public ArrayList<NewsVO> list_search_paging(String word, int now_page, int record_per_page) {
+  public ArrayList<NewsCateVO> list_search_paging(String word, int now_page, int record_per_page) {
     /*
      페이지당 10개의 레코드 출력
      1 page: WHERE r >= 1 AND r <= 10
@@ -155,7 +155,7 @@ public class NewsCateProc implements NewsCateProcInter {
     map.put("start_num", start_num);
     map.put("end_num", end_num);
     
-    ArrayList<NewsVO> list = this.cateDAO.list_search_paging(map);
+    ArrayList<NewsCateVO> list = this.cateDAO.list_search_paging(map);
     // System.out.println("-> " + list.size());
     
     return list;
@@ -258,6 +258,11 @@ public class NewsCateProc implements NewsCateProcInter {
     str.append("</div>"); 
      
     return str.toString(); 
+  }
+  @Override
+  public int deleteKorea(int newscateno) {
+    // TODO Auto-generated method stub
+    return 0;
   }
 
 }

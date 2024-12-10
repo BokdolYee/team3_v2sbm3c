@@ -19,7 +19,7 @@ import lombok.ToString;
 //);
 
 @Setter @Getter @ToString
-public class NewsVO {
+public class NewsCateVO {
   /** 카테고리 번호, Sequence에서 자동 생성 */  
   private Integer newscateno=0;
   

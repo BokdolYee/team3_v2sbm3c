@@ -2,27 +2,27 @@ package dev.mvc.newscate;
 
 import java.util.ArrayList;
 
-import dev.mvc.newscate.NewsVOMenu;
+import dev.mvc.newscate.NewsCateVOMenu;
 
 
 public interface NewsCateProcInter {
   
-  public int create(NewsVO newsVO);
+  public int create(NewsCateVO newscateVO);
   
   /**
    * 전체 목록
    * @return
    */
-  public ArrayList<NewsVO> list_all();
+  public ArrayList<NewsCateVO> list_all();
   
-  public NewsVO read(Integer newscateno);
+  public NewsCateVO read(Integer newscateno);
   
   /**
    * 수정
    * @param movieVO 수정할내용
    * @return 수정된 레코드 갯수
    */
-  public int update(NewsVO newsVO);
+  public int update(NewsCateVO newscateVO);
   
   /**
    * 삭제
@@ -61,15 +61,15 @@ public interface NewsCateProcInter {
    */
   public int update_visible_n(int newscateno);
   
-  ArrayList<NewsVO> list_all_categrp_y();
+  ArrayList<NewsCateVO> list_all_categrp_y();
   
-  ArrayList<NewsVO> list_all_cate_y(String genre);
+  ArrayList<NewsCateVO> list_all_cate_y(String genre);
   
   /**
    * 화면 상단 메뉴
    * @return
    */
-  public ArrayList<NewsVOMenu> menu();
+  public ArrayList<NewsCateVOMenu> menu();
   
   /**
    * 장르 목록
@@ -77,7 +77,7 @@ public interface NewsCateProcInter {
    */
   public ArrayList<String> genreset();
   
-  public ArrayList<NewsVO> list_search(String word);
+  public ArrayList<NewsCateVO> list_search(String word);
   
   /**
    * 검색 갯수
@@ -94,7 +94,7 @@ public interface NewsCateProcInter {
    * @param record_per_page 페이지당 출력할 레코드 수
    * @return
    */
-  public ArrayList<NewsVO> list_search_paging(String word, int now_page, int record_per_page);
+  public ArrayList<NewsCateVO> list_search_paging(String word, int now_page, int record_per_page);
 
   /** 
    * SPAN태그를 이용한 박스 모델의 지원, 1 페이지부터 시작 
