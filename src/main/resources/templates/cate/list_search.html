@@ -15,7 +15,7 @@
   <div class="menu_line"></div>
   
   <div class="flex_div_center" style="width: 90%; margin: 0px auto;">  
-    <form name="frm" method="post" action="/cate/create" th:object="${cateVO}">
+    <form name="frm" method="post" action="/cate/create" th:object="${newscateVO}">
       <div style="margin-right: 2px; width: 22%; float: left;">
         <input type="text" name="genre" value="" autofocus="autofocus"
                class="form-control" style="width: 100%;" th:field="*{genre}" placeholder="카테고리 그룹">
