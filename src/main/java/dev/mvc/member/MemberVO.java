@@ -11,7 +11,7 @@ public class MemberVO {
   passwd     VARCHAR(200)   NOT NULL, -- 비밀번호, 영숫자 조합, 암호화
   name       VARCHAR(30)    NOT NULL, -- 성명, 한글 10자 저장 가능
   birth      VARCHAR(30)    NOT NULL, -- 생년월일 ex) 20241205
-  nickname   VARCHAR(36)    NOT NULL,
+  nickname   VARCHAR(36)    NOT NULL UNIQUE,
   tel        VARCHAR(14)    NOT NULL, -- 전화번호
   gender     VARCHAR(6)     NOT NULL, -- 성별, 남성 or 여성
   zipcode    VARCHAR(5)     NOT NULL, -- 우편번호, ex) 03153
