@@ -16,8 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
-
+import dev.mvc.contents.ContentsProcInter;
 import dev.mvc.tool.Tool;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -32,7 +31,7 @@ public class NewsCateCont {
   private NewsCateProcInter newscateProc;
 
   @Autowired
-  @Qualifier("dev.mvc.contesnt.contentProc") // @Component("dev.mvc.contents.ContentsProc")
+  @Qualifier("dev.mvc.contents.contentProc") // @Component("dev.mvc.contents.ContentsProc")
   private ContentsProcInter contentProc;
   
   /** 페이지당 출력할 레코드 갯수, nowPage는 1부터 시작 */
