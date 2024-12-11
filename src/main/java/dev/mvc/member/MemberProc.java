@@ -125,6 +125,12 @@ public class MemberProc implements MemberProcInter {
     int cnt = this.memberDAO.passwd_check(map);
     return cnt;
   }
+
+  @Override
+  public boolean isMemberAdmin(HttpSession session) {
+    // TODO Auto-generated method stub
+    return false;
+  }
   
  
 }
