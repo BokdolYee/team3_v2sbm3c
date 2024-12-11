@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import dev.mvc.member.MemberProcInter;
+import dev.mvc.newscate.NewsCateProcInter;
+import dev.mvc.newscate.NewsCateVO;
+import dev.mvc.newscate.NewsCateVOMenu;
 import jakarta.servlet.http.HttpSession;
 
 @RequestMapping(value = "/contents")
@@ -19,6 +23,14 @@ public class ContentsCont {
   @Autowired
   @Qualifier("dev.mvc.contents.ContentsProc") // @Component("dev.mvc.contents.ContentsProc")
   private ContentsProcInter contentsProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.newscate.NewsCateProc") // @Component("dev.mvc.cate.CateProc")
+  private NewsCateProcInter newscateProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.member.MemberProc") // @Service("dev.mvc.member.MemberProc")
+  private MemberProcInter memberProc;
   
   public ContentsCont() {
     System.out.println("-> ContentsCont created.");

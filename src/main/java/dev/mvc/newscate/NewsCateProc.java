@@ -259,10 +259,6 @@ public class NewsCateProc implements NewsCateProcInter {
      
     return str.toString(); 
   }
-  @Override
-  public int deleteKorea(int newscateno) {
-    // TODO Auto-generated method stub
-    return 0;
-  }
+
 
 }

@@ -54,4 +54,9 @@ public class NewsCateVO {
   /** 등록일, sysdate 자동 생성 */
   private String rdate = "";
   
+  /** 뉴스 카테고리 그룹 번호 */
+  @NotNull(message = "뉴스 카테고리 그룹 번호는 필수 입력 항목입니다.")
+  @Min(value = 1, message = "뉴스 카테고리 그룹 번호는 1 이상의 값이어야 합니다.")
+  private Integer newscategrpno;
+  
 }

@@ -255,20 +255,20 @@ public class ContentsProc implements ContentsProcInter {
   }
 
   @Override
-  public void updateCntCount(int cateno) {
-    contentsDAO.updateCntCount(cateno);
+  public void updateCntCount(int newscateno) {
+    contentsDAO.updateCntCount(newscateno);
     
   }
 
   @Override
-  public void updateCnt(int cateno) {
-    contentsDAO.updateCnt(cateno);
+  public void updateCnt(int newscateno) {
+    contentsDAO.updateCnt(newscateno);
     
   }
   
   @Override
-  public void resetCnt(int cateno) {
-    contentsDAO.resetCnt(cateno); 
+  public void resetCnt(int newscateno) {
+    contentsDAO.resetCnt(newscateno); 
   }
 
   @Override

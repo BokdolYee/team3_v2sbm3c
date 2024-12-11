@@ -31,7 +31,7 @@ public interface NewsCateProcInter {
    */
   public int delete(int newscateno);
   
-  public int deleteKorea(int newscateno);
+  public int deleteContents(int newscateno);
   
   /**
    * <!--우선 순위 높임, 10 등 -> 1 등-->

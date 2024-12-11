@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import dev.mvc.contents.ContentsProcInter;
+import dev.mvc.member.MemberProcInter;
 import dev.mvc.tool.Tool;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -31,8 +32,8 @@ public class NewsCateCont {
   private NewsCateProcInter newscateProc;
 
   @Autowired
-  @Qualifier("dev.mvc.contents.contentProc") // @Component("dev.mvc.contents.ContentsProc")
-  private ContentsProcInter contentProc;
+  @Qualifier("dev.mvc.contents.ContentsProc") // @Component("dev.mvc.contents.ContentsProc")
+  private ContentsProcInter contentsProc;
   
   /** 페이지당 출력할 레코드 갯수, nowPage는 1부터 시작 */
   public int record_per_page = 4;
@@ -366,11 +367,11 @@ public class NewsCateCont {
       NewsCateVO newscateVO = this.newscateProc.read(newscateno); //삭제전에 삭제 결과를 출력할 레코드 조회
       model.addAttribute("newscateVO", newscateVO);
       
-      this.newscateProc.deleteKorea(newscateno); // 자식 죽이기!!!
+      this.newscateProc.deleteContents(newscateno); // 자식 죽이기!!!
       
-      this.ContentsProc.updateCntCount(newscateno); // 자식 죽이기
-      this.ContentsProc.resetCnt(newscateno); // 자식 죽이기
-      this.ContentsProc.updateCnt(newscateno); // 자식 죽이기
+      this.contentsProc.updateCntCount(newscateno); // 자식 죽이기
+      this.contentsProc.resetCnt(newscateno); // 자식 죽이기
+      this.contentsProc.updateCnt(newscateno); // 자식 죽이기
       
       int cnt = this.newscateProc.delete(newscateno);
       System.out.println("-> cnt :" + cnt);
