@@ -191,7 +191,7 @@ public class NewsCateCont {
                                @RequestParam(name="word", defaultValue = "") String word,
                                @RequestParam(name="now_page", defaultValue = "") int now_page) {
     
-    if (this.memberProc.isMemberAdmin(session)) {
+    if (this.memberProc.isAdmin(session)) {
       NewsCateVO newscateVO = this.newscateProc.read(newscateno);
       model.addAttribute("newscateVO", newscateVO);
       
@@ -247,7 +247,7 @@ public class NewsCateCont {
                                @RequestParam(name="word", defaultValue = "") String word,
                                @RequestParam(name="now_page", defaultValue = "") int now_page,
                                RedirectAttributes ra) {
-    if (this.memberProc.isMemberAdmin(session)) {
+    if (this.memberProc.isAdmin(session)) {
       //   System.out.println("-> update post");
       if(bindingResult.hasErrors() == true) { // 에러가 있으면 폼으로 돌아갈 것.
      //   System.out.println("-> ERROR 발생");
@@ -310,7 +310,7 @@ public class NewsCateCont {
   public String delete(HttpSession session, Model model, @PathVariable("newscateno") Integer newscateno,
                             @RequestParam(name="word", defaultValue="") String word,
                             @RequestParam(name="now_page", defaultValue = "") int now_page) {
-    if (this.memberProc.isMemberAdmin(session)) {
+    if (this.memberProc.isAdmin(session)) {
       NewsCateVO newscateVO = this.newscateProc.read(newscateno);
       model.addAttribute("newscateVO", newscateVO);
       
@@ -361,7 +361,7 @@ public class NewsCateCont {
       @RequestParam(name="word", defaultValue="") String word,
       @RequestParam(name="now_page", defaultValue = "") int now_page,
       RedirectAttributes ra) {
-    if (this.memberProc.isMemberAdmin(session)) {
+    if (this.memberProc.isAdmin(session)) {
       System.out.println("-> delete_process");
       
       NewsCateVO newscateVO = this.newscateProc.read(newscateno); //삭제전에 삭제 결과를 출력할 레코드 조회
@@ -458,7 +458,7 @@ public class NewsCateCont {
       @RequestParam(name="now_page", defaultValue = "") int now_page,
       RedirectAttributes ra ) {
     
-    if (this.memberProc.isMemberAdmin(session)) {
+    if (this.memberProc.isAdmin(session)) {
       this.newscateProc.update_visible_y(newscateno);
       
       ra.addAttribute("word", word); // redirect로 데이터 전송
@@ -483,7 +483,7 @@ public class NewsCateCont {
       @RequestParam(name="now_page", defaultValue = "") int now_page,
       RedirectAttributes ra ) {
     
-    if (this.memberProc.isMemberAdmin(session)) {
+    if (this.memberProc.isAdmin(session)) {
       this.newscateProc.update_visible_n(newscateno);
       
       ra.addAttribute("word", word); // redirect로 데이터 전송
@@ -549,7 +549,7 @@ public class NewsCateCont {
   public String list_search_paging(HttpSession session,Model model,
                                @RequestParam(name="word", defaultValue = "")String word,
                                @RequestParam(name="now_page", defaultValue="1") int now_page) {
-    if (this.memberProc.isMemberAdmin(session)) {
+    if (this.memberProc.isAdmin(session)) {
       NewsCateVO newscateVO = new NewsCateVO();
       //movieVO.setGenre("분류");
       //movieVO.setName("카테고리 이름을 입력하세요.");

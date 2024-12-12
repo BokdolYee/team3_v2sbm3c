@@ -7,7 +7,6 @@ plugins {
 
 group = 'dev.mvc'
 version = '1.0'
-
 java {
 	toolchain {
 		languageVersion = JavaLanguageVersion.of(17)

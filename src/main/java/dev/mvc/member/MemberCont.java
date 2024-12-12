@@ -133,6 +133,7 @@ public class MemberCont {
     } else {
       return "redirect:/member/login_cookie_need"; // redirect
     }
+  }
   
   /**
    * 회원 정보 조회 (내 정보 보기)
