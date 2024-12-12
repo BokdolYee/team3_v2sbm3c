@@ -89,11 +89,56 @@ public class MemberProc implements MemberProcInter {
   }
 
   /**
-   * 회원 정보 수정(아이디, 비번, 닉, 이름, 번호, 우편번호, 상세 주소)
+   * id 수정
    */
   @Override
-  public int update(MemberVO memberVO) {
-    int cnt = this.memberDAO.update(memberVO);
+  public int update_id(MemberVO memberVO) {
+    int cnt = this.memberDAO.update_id(memberVO);
+    return cnt;
+  }
+
+  /**
+   * name 수정
+   */
+  @Override
+  public int update_name(MemberVO memberVO) {
+    int cnt = this.memberDAO.update_name(memberVO);
+    return cnt;
+  }
+
+  /**
+   * nickname 수정
+   */
+  @Override
+  public int update_nickname(MemberVO memberVO) {
+    int cnt = this.memberDAO.update_nickname(memberVO);
+    return cnt;
+  }
+
+  /**
+   * tel 수정
+   */
+  @Override
+  public int update_tel(MemberVO memberVO) {
+    int cnt = this.memberDAO.update_tel(memberVO);
+    return cnt;
+  }
+
+  /**
+   * zipcode 수정
+   */
+  @Override
+  public int update_zipcode(MemberVO memberVO) {
+    int cnt = this.memberDAO.update_zipcode(memberVO);
+    return cnt;
+  }
+
+  /**
+   * address 수정
+   */
+  @Override
+  public int update_address(MemberVO memberVO) {
+    int cnt = this.memberDAO.update_address(memberVO);
     return cnt;
   }
 
@@ -106,6 +151,9 @@ public class MemberProc implements MemberProcInter {
     return cnt;
   }
 
+  /**
+   * 로그인 처리
+   */
   @Override
   public int login(HashMap<String, Object> map) {
     String passwd = (String)map.get("passwd");
@@ -116,6 +164,9 @@ public class MemberProc implements MemberProcInter {
     return cnt;
   }
 
+  /**
+   * 현재 passwd 검사
+   */
   @Override
   public int passwd_check(HashMap<String, Object> map) {
     String passwd = (String)map.get("passwd");
@@ -126,11 +177,18 @@ public class MemberProc implements MemberProcInter {
     return cnt;
   }
 
+
   @Override
-  public boolean isMemberAdmin(HttpSession session) {
-    // TODO Auto-generated method stub
-    return false;
+  public int update_passwd(HashMap<String, Object> map) {
+    String passwd = (String)map.get("passwd");
+    passwd = this.security.aesEncode(passwd);
+    map.put("passwd", passwd);
+    
+    int cnt = this.memberDAO.update_passwd(map);
+    return cnt;
   }
+
+  
   
  
 }

@@ -20,7 +20,13 @@ import com.zaxxer.hikari.HikariDataSource;
 @PropertySource("classpath:/application.properties")  // 설정 파일 위치
 @MapperScan(basePackages= {"dev.mvc.newscate",
                                             "dev.mvc.member",
-                                            "dev.mvc.contents"
+                                            "dev.mvc.contents",
+                                            "dev.mvc.analysis",
+                                            "dev.mvc.news",
+                                            "dev.mvc.newscategrp",
+                                            "dev.mvc.stock",
+                                            "dev.mvc.stockdata",
+                                            "dev.mvc.summarize",
     
 }) // DAO interface를 찾는 위치
 public class DatabaseConfiguration {

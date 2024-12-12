@@ -38,10 +38,45 @@
     WHERE id = #{id}
   </select>
   
-  <!-- 회원 정보 수정 -->
-  <update id="update" parameterType="dev.mvc.member.MemberVO">
+  <!-- 회원 정보 수정(id) -->
+  <update id="update_id" parameterType="dev.mvc.member.MemberVO">
     UPDATE member 
-    SET id=#{id}, passwd=#{passwd}, name=#{name}, nickname=#{nickname}, tel=#{tel}, zipcode=#{zipcode}, address=#{address}
+    SET id=#{id}
+    WHERE memberno=#{memberno}
+  </update>
+  
+  <!-- 회원 정보 수정(name) -->
+  <update id="update_name" parameterType="dev.mvc.member.MemberVO">
+    UPDATE member
+    SET name=#{name}
+    WHERE memberno=#{memberno}
+  </update>
+  
+  <!-- 회원 정보 수정(nickname) -->
+  <update id="update_nickname" parameterType="dev.mvc.member.MemberVO">
+    UPDATE member
+    SET nickname=#{nickname}
+    WHERE memberno=#{memberno}
+  </update>
+  
+  <!-- 회원 정보 수정(tel) -->
+  <update id="update_tel" parameterType="dev.mvc.member.MemberVO">
+    UPDATE member
+    SET tel=#{tel}
+    WHERE memberno=#{memberno}
+  </update>
+  
+  <!-- 회원 정보 수정(zipcode) -->
+  <update id="update_zipcode" parameterType="dev.mvc.member.MemberVO">
+    UPDATE member
+    SET zipcode=#{zipcode}
+    WHERE memberno=#{memberno}
+  </update>
+  
+  <!-- 회원 정보 수정(address) -->
+  <update id="update_address" parameterType="dev.mvc.member.MemberVO">
+    UPDATE member
+    SET address=#{address}
     WHERE memberno=#{memberno}
   </update>
   
@@ -59,11 +94,18 @@
     WHERE id=#{id} AND passwd=#{passwd}
   </select>
   
-  <!-- 회원 정보 수정 클릭 시 현재 패스워드 검사 -->
+  <!-- 비밀번호 변경 클릭 시 현재 패스워드 검사 -->
   <select id="passwd_check" parameterType="HashMap" resultType="int">
     SELECT COUNT(memberno) as cnt
     FROM member
     WHERE memberno=#{memberno} AND passwd=#{passwd}
   </select>
+  
+  <!-- 회원 정보 수정(passwd) -->
+  <update id="update_passwd" parameterType="HashMap">
+    UPDATE member
+    SET passwd=#{passwd}
+    WHERE memberno=#{memberno}
+  </update>
   
 </mapper>

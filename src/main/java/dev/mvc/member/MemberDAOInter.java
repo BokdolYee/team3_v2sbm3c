@@ -39,11 +39,46 @@ public interface MemberDAOInter {
   public MemberVO readByID(String id);
 
   /**
-   * 수정 처리
+   * id 수정 처리
    * @param memberVO
    * @return
    */
-  public int update(MemberVO memberVO);
+  public int update_id(MemberVO memberVO);
+  
+  /**
+   * name 수정 처리
+   * @param memberVO
+   * @return
+   */
+  public int update_name(MemberVO memberVO);
+  
+  /**
+   * nickname 수정 처리
+   * @param memberVO
+   * @return
+   */
+  public int update_nickname(MemberVO memberVO);
+  
+  /**
+   * tel 수정 처리
+   * @param memberVO
+   * @return
+   */
+  public int update_tel(MemberVO memberVO);
+  
+  /**
+   * zipcode 수정 처리
+   * @param memberVO
+   * @return
+   */
+  public int update_zipcode(MemberVO memberVO);
+  
+  /**
+   * address 수정 처리
+   * @param memberVO
+   * @return
+   */
+  public int update_address(MemberVO memberVO);
   
   /**
    * 회원 탈퇴 처리(아예 삭제가 아닌 등급을 탈퇴로 변경)
@@ -63,4 +98,11 @@ public interface MemberDAOInter {
    * @return 1: 일치, 0: 불일치
    */
   public int passwd_check(HashMap<String, Object> map);
+  
+  /**
+   * passwd 수정 처리
+   * @param map
+   * @return 변경된 passwd 개수
+   */
+  public int update_passwd(HashMap<String, Object> map);
 }
