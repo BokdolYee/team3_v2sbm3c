@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -29,7 +30,10 @@ public class MemberCont {
   @Autowired
   @Qualifier("dev.mvc.member.MemberProc")
   private MemberProcInter memberProc;
-  private NewsCateProcInter newsCateProc;
+  
+//  @Autowired
+//  @Qualifier("dev.mvc.newscate.NewscateProc")
+//  private NewsCateProcInter newsCateProc;
   
   public MemberCont() {
     System.out.println("MemberCont 생성됨");
@@ -74,6 +78,7 @@ public class MemberCont {
    * @param model
    * @param memberVO
    * @return
+   * 
    */
   @GetMapping(value="/create") // http://localhost:9093/member/create
   public String create_form(Model model, @ModelAttribute("memberVO") MemberVO memberVO) {
@@ -176,7 +181,7 @@ public class MemberCont {
    * @param memberVO
    * @return
    */
-  @PostMapping(value="/read")
+  @PostMapping(value="/update_id")
   public String update_id_proc(HttpSession session, Model model, @ModelAttribute("memberVO")MemberVO memberVO) {
     String grade = (String)session.getAttribute("grade");
     
@@ -207,7 +212,7 @@ public class MemberCont {
    * @param current_passwd
    * @return 1: 일치, 0: 불일치
    */
-  @PostMapping(value="/read")
+  @PostMapping(value="/passwd_check")
   @ResponseBody
   public String passwd_check(HttpSession session, @RequestBody String json_src) {
     System.out.println("json_src: " + json_src); // json_src: {"current_passwd":"1234"}
@@ -240,7 +245,7 @@ public class MemberCont {
    * @param passwd 새로운 패스워드
    * @return
    */
-  @PostMapping(value="/read")
+  @PostMapping(value="/update_passwd")
   public String update_passwd_proc(HttpSession session, 
                                                     Model model, 
                                                     @RequestParam(value="current_passwd", defaultValue = "") String current_passwd, 
@@ -320,7 +325,7 @@ public class MemberCont {
    * @param memberVO
    * @return
    */
-  @PostMapping(value="/read")
+  @PostMapping(value="/update_name")
   public String update_name_proc(HttpSession session, Model model, @ModelAttribute("memberVO")MemberVO memberVO) {
     String grade = (String)session.getAttribute("grade");
     
@@ -352,7 +357,7 @@ public class MemberCont {
    * @param memberVO
    * @return
    */
-  @PostMapping(value="/read")
+  @PostMapping(value="/update_nickname")
   public String update_nickname_proc(HttpSession session, Model model, @ModelAttribute("memberVO")MemberVO memberVO) {
     String grade = (String)session.getAttribute("grade");
     
@@ -384,7 +389,7 @@ public class MemberCont {
    * @param memberVO
    * @return
    */
-  @PostMapping(value="/read")
+  @PostMapping(value="/update_tel")
   public String update_tel_proc(HttpSession session, Model model, @ModelAttribute("memberVO")MemberVO memberVO) {
     String grade = (String)session.getAttribute("grade");
     
@@ -416,7 +421,7 @@ public class MemberCont {
    * @param memberVO
    * @return
    */
-  @PostMapping(value="/read")
+  @PostMapping(value="/update_zipcode")
   public String update_zipcode_proc(HttpSession session, Model model, @ModelAttribute("memberVO")MemberVO memberVO) {
     String grade = (String)session.getAttribute("grade");
     
@@ -448,7 +453,7 @@ public class MemberCont {
    * @param memberVO
    * @return
    */
-  @PostMapping(value="/read")
+  @PostMapping(value="/update_address")
   public String update_address_proc(HttpSession session, Model model, @ModelAttribute("memberVO")MemberVO memberVO) {
     String grade = (String)session.getAttribute("grade");
     
@@ -479,7 +484,7 @@ public class MemberCont {
    * @param memberno 삭제할 회원 번호
    * @return
    */
-  @PostMapping(value="/read")
+  @PostMapping(value="/withdraw")
   public String withdraw_process(HttpSession session, Model model, @ModelAttribute("memberVO")MemberVO memberVO) {
  // 회원 본인이거나 관리자 본인일 경우에 처리
     String grade = (String)session.getAttribute("grade");

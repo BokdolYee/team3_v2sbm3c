@@ -15,7 +15,6 @@ public class MemberProc implements MemberProcInter {
   @Autowired
   private MemberDAOInter memberDAO;
   
-  @Autowired
   Security security;
   
   public MemberProc(){

@@ -68,6 +68,19 @@ public class Security {
  
     return enStr;
   }
+  
+  // 복호화
+  public String aesDecode(String str)
+      throws java.io.UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException,
+      InvalidKeyException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException {
+    Cipher c = Cipher.getInstance("AES/CBC/PKCS5Padding");
+    c.init(Cipher.DECRYPT_MODE, keySpec, new IvParameterSpec(iv.getBytes("UTF-8")));
+  
+    byte[] byteStr = Base64.decodeBase64(str.getBytes());
+  
+    return new String(c.doFinal(byteStr), "UTF-8");
+  }
+  
  
 }
 
