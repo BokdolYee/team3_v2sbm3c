@@ -61,46 +61,47 @@ public interface MemberProcInter {
   public boolean isAdmin(HttpSession session);
 
   /**
-   * id 수정 처리
+   * 회원 정보 수정 처리
    * @param memberVO
    * @return
    */
-  public int update_id(MemberVO memberVO);
+  public int update(MemberVO memberVO);
   
   /**
    * name 수정 처리
    * @param memberVO
    * @return
-   */
+   
   public int update_name(MemberVO memberVO);
   
   /**
    * nickname 수정 처리
    * @param memberVO
    * @return
-   */
+   *
   public int update_nickname(MemberVO memberVO);
   
   /**
    * tel 수정 처리
    * @param memberVO
    * @return
-   */
+   *
   public int update_tel(MemberVO memberVO);
   
   /**
    * zipcode 수정 처리
    * @param memberVO
    * @return
-   */
+   *
   public int update_zipcode(MemberVO memberVO);
   
   /**
    * address 수정 처리
    * @param memberVO
    * @return
-   */
+   *
   public int update_address(MemberVO memberVO);
+  */
   
   /**
    * 회원 탈퇴 처리(db에서 삭제가 아닌 등급을 탈퇴로 변경)

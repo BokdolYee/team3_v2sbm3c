@@ -23,6 +23,7 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.buildship.core.gradleclasspathcontainer"/>
 	<classpathentry kind="src" path="bin/generated-sources/annotations">
+<<<<<<< Updated upstream
 		<attributes>
 			<attribute name="optional" value="true"/>
 		</attributes>
@@ -34,6 +35,8 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path=".apt_generated">
+=======
+>>>>>>> Stashed changes
 		<attributes>
 			<attribute name="optional" value="true"/>
 		</attributes>

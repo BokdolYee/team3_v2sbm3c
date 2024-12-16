@@ -16,8 +16,11 @@
         <wb-resource deploy-path="/" source-path="src/main/webapp"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/bin/generated-sources/annotations"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/bin/generated-test-sources/annotations"/>
+<<<<<<< Updated upstream
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/.apt_generated"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/.apt_generated_tests"/>
+=======
+>>>>>>> Stashed changes
                 	
     
     </wb-module>

@@ -47,5 +47,10 @@ INSERT INTO member(memberno, id, passwd, name, birth, nickname,
                 tel, gender, zipcode, address, replycnt, rdate, grade)
 VALUES(member_seq.nextval, 'doom@gmail.com', 'fS/kjO+fuEKk06Zl7VYMhg==', '관리자', '20241205', 'doom', 
                 '01012345678', '남성', '12345', '5층 512호', 0, sysdate, 1);
+                
+INSERT INTO member(memberno, id, passwd, name, birth, nickname, 
+                tel, gender, zipcode, address, replycnt, rdate, grade)
+VALUES(member_seq.nextval, 'admin', 'fS/kjO+fuEKk06Zl7VYMhg==', 'admin', '20241205', 'admin', 
+                '01012345678', '남성', '12345', '5층 512호', 0, sysdate, 1);
 
 SELECT * FROM member;
