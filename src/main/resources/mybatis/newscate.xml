@@ -6,7 +6,7 @@
   <!-- Create -->
   <insert id="create" parameterType="dev.mvc.newscate.NewsCateVO">
     INSERT INTO newscate (newscateno, genre, name, cnt, seqno, visible, rdate) 
-    VALUES (newscate_seq.nextval, #{genre}, #{name}, #{cnt}, #{seqno}, #{visible}, sysdate, #{newscategrpno})
+    VALUES (newscate_seq.nextval, #{genre}, #{name}, #{cnt}, #{seqno}, #{visible}, sysdate)
   </insert>
 
   <!-- Read -->

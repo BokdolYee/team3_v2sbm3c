@@ -5,15 +5,15 @@
 <mapper namespace="dev.mvc.contents.ContentsDAOInter">
   <!-- 등록한 레코드 갯수 1 리턴, #{memberno}: public int getAdminno() 호출됨 -->
   <insert id="create" parameterType="dev.mvc.contents.ContentsVO">
-    INSERT INTO contents(contentsno, memberno, cateno, title, content, passwd, word,
+    INSERT INTO contents(contentsno, memberno, newscateno, title, content, passwd, word,
                                      file1, file1saved, thumb1, size1, rdate)
-    VALUES(contents_seq.nextval, #{memberno}, #{cateno}, #{title}, #{content}, #{passwd}, #{word},
+    VALUES(contents_seq.nextval, #{memberno}, #{newscateno}, #{title}, #{content}, #{passwd}, #{word},
                 #{file1}, #{file1saved}, #{thumb1}, #{size1}, sysdate)
   </insert>
 
   <!-- 모든 카테고리의 등록된 글목록 -->
   <select id="list_all" resultType="dev.mvc.contents.ContentsVO">
-    SELECT contentsno, memberno, cateno, title, content, recom, cnt, replycnt, passwd, word, rdate,
+    SELECT contentsno, memberno, newscateno, title, content, recom, cnt, replycnt, passwd, word, rdate,
                file1, file1saved, thumb1, size1, mp4
     FROM contents
     ORDER BY contentsno DESC
@@ -21,16 +21,16 @@
   
   <!-- 특정 카테고리의 등록된 글목록 -->
   <select id="list_by_cateno" resultType="dev.mvc.contents.ContentsVO" parameterType="int">
-    SELECT contentsno, memberno, cateno, title, content, recom, cnt, replycnt, rdate,
+    SELECT contentsno, memberno, newscateno, title, content, recom, cnt, replycnt, rdate,
               LOWER(file1) as file1, file1saved, thumb1, size1, mp4
     FROM contents 
-    WHERE cateno = #{cateno}
+    WHERE newscateno = #{newscateno}
     ORDER BY contentsno DESC
   </select> 
   
   <!-- 일반적인 조회 -->
   <select id="read" resultType="dev.mvc.contents.ContentsVO" parameterType="int">
-    SELECT contentsno, memberno, cateno, title, content, recom, cnt, replycnt, passwd, word, rdate,
+    SELECT contentsno, memberno, newscateno, title, content, recom, cnt, replycnt, passwd, word, rdate,
               file1, file1saved, thumb1, size1, map, youtube
     FROM contents
     WHERE contentsno = #{contentsno}
@@ -52,15 +52,15 @@
 
   <!-- 카테고리별 검색 목록 -->
   <select id="list_by_cateno_search" resultType="dev.mvc.contents.ContentsVO" parameterType="HashMap">
-    SELECT contentsno, memberno, cateno, title, content, recom, cnt, replycnt, word, rdate,
+    SELECT contentsno, memberno, newscateno, title, content, recom, cnt, replycnt, word, rdate,
             file1, file1saved, thumb1, size1, map, youtube
     FROM contents
     <choose>
       <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
-        WHERE cateno=#{cateno}
+        WHERE newscateno=#{newscateno}
       </when>
       <otherwise> <!-- 검색하는 경우 -->
-        WHERE cateno=#{cateno} AND (UPPER(title) LIKE '%' || UPPER(#{word}) || '%' 
+        WHERE newscateno=#{newscateno} AND (UPPER(title) LIKE '%' || UPPER(#{word}) || '%' 
                                                   OR UPPER(content) LIKE '%' || UPPER(#{word}) || '%' 
                                                   OR UPPER(word) LIKE '%' || UPPER(#{word}) || '%')
       </otherwise>
@@ -74,10 +74,10 @@
     FROM contents
     <choose>
       <when test="word == null or word == ''"> <!-- 검색하지 않는 경우의 레코드 갯수 -->
-        WHERE cateno=#{cateno}
+        WHERE newscateno=#{newscateno}
       </when>
       <otherwise> <!-- 검색하는 경우의 레코드 갯수 -->
-        WHERE cateno=#{cateno} AND (UPPER(title) LIKE '%' || UPPER(#{word}) || '%' 
+        WHERE newscateno=#{newscateno} AND (UPPER(title) LIKE '%' || UPPER(#{word}) || '%' 
                                                   OR UPPER(content) LIKE '%' || UPPER(#{word}) || '%' 
                                                   OR UPPER(word) LIKE '%' || UPPER(#{word}) || '%')
       </otherwise>
@@ -86,18 +86,18 @@
 
   <!-- 카테고리별 검색 + 페이징 목록 -->
   <select id="list_by_cateno_search_paging" resultType="dev.mvc.contents.ContentsVO" parameterType="HashMap">
-   SELECT contentsno, memberno, cateno, title, content, recom, cnt, replycnt, rdate, file1, file1saved, thumb1, size1, map, youtube, r
+   SELECT contentsno, memberno, newscateno, title, content, recom, cnt, replycnt, rdate, file1, file1saved, thumb1, size1, map, youtube, r
    FROM (
-              SELECT contentsno, memberno, cateno, title, content, recom, cnt, replycnt, rdate, file1, file1saved, thumb1, size1, map, youtube, rownum as r
+              SELECT contentsno, memberno, newscateno, title, content, recom, cnt, replycnt, rdate, file1, file1saved, thumb1, size1, map, youtube, rownum as r
               FROM (
-                        SELECT contentsno, memberno, cateno, title, content, recom, cnt, replycnt, rdate, file1, file1saved, thumb1, size1, map, youtube
+                        SELECT contentsno, memberno, newscateno, title, content, recom, cnt, replycnt, rdate, file1, file1saved, thumb1, size1, map, youtube
                         FROM contents
                         <choose>
                           <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
-                            WHERE cateno=#{cateno}
+                            WHERE newscateno=#{newscateno}
                           </when>
                           <otherwise>
-                            WHERE cateno=#{cateno} AND (UPPER(title) LIKE '%' || UPPER(#{word}) || '%' 
+                            WHERE newscateno=#{newscateno} AND (UPPER(title) LIKE '%' || UPPER(#{word}) || '%' 
                                                               OR UPPER(content) LIKE '%' || UPPER(#{word}) || '%' 
                                                               OR UPPER(word) LIKE '%' || UPPER(#{word}) || '%')
                           </otherwise>
@@ -145,13 +145,13 @@
   <select id="count_by_cateno" resultType="int" parameterType="int">
     SELECT COUNT(*) as cnt 
     FROM contents 
-    WHERE cateno=#{cateno}
+    WHERE newscateno=#{newscateno}
   </select>
   
   <!-- 특정 카테고리에 속한 모든 레코드 삭제 -->
   <delete id="delete_by_cateno" parameterType="int">
     DELETE FROM contents
-    WHERE cateno=#{cateno}
+    WHERE newscateno=#{newscateno}
   </delete>
 
   <!-- FK memberno 컬럼에 대응하는 필수 SQL -->
@@ -184,35 +184,35 @@
    
     <update id="updateCntCount" parameterType="dev.mvc.contents.ContentsVO">
         UPDATE cate 
-        SET cnt = (SELECT COUNT(*) FROM contents WHERE cateno = #{cateno})
-        WHERE cateno = #{cateno}
+        SET cnt = (SELECT COUNT(*) FROM contents WHERE newscateno = #{newscateno})
+        WHERE newscateno = #{newscateno}
     </update>
     
     <update id="resetCnt" parameterType="dev.mvc.contents.ContentsVO">
-      UPDATE cate
+      UPDATE newscate
       SET cnt = 0
       WHERE genre = (
           SELECT genre
-          FROM cate
-          WHERE cateno = #{cateno}
+          FROM newscate
+          WHERE newscateno = #{newscateno}
       ) AND name = '--'
     </update>
 
     <update id="updateCnt" parameterType="dev.mvc.contents.ContentsVO">
-      UPDATE cate
+      UPDATE newscate
       SET cnt = (
           SELECT SUM(cnt)
-          FROM cate
+          FROM newscate
           WHERE genre = (
               SELECT genre
-              FROM cate
-              WHERE cateno = #{cateno}
+              FROM newscate
+              WHERE newscateno = #{newscateno}
           )
       )
       WHERE genre = (
           SELECT genre
-          FROM cate
-          WHERE cateno = #{cateno}
+          FROM newscate
+          WHERE newscateno = #{newscateno}
       ) AND name = '--'
   </update>
 </mapper> 
