@@ -27,11 +27,25 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="bin/generated-sources/annotations">
+<<<<<<< Updated upstream
 		<attributes>
 			<attribute name="optional" value="true"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" output="bin/test" path="bin/generated-test-sources/annotations">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="test" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path=".apt_generated">
+=======
+>>>>>>> Stashed changes
+		<attributes>
+			<attribute name="optional" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" output="bin/test" path=".apt_generated_tests">
 		<attributes>
 			<attribute name="optional" value="true"/>
 			<attribute name="test" value="true"/>

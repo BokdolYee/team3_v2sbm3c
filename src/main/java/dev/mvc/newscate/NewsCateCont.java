@@ -272,7 +272,7 @@ public class NewsCateCont {
         ra.addAttribute("word", word);
         ra.addAttribute("now_page", now_page); // redirect로 데이터 전송
         
-        return "redirect:/newscate/update/" + newscateVO.getNewscateno();
+        return "redirect:/cate/update/" + newscateVO.getNewscateno();
         
       } else {
         model.addAttribute("code", "update_fail");

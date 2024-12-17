@@ -116,17 +116,17 @@ public class MemberProc implements MemberProcInter {
   }
 
   /**
-   * id 수정
+   * 회원 정보 수정(비밀번호 제외)
    */
   @Override
-  public int update_id(MemberVO memberVO) {
-    int cnt = this.memberDAO.update_id(memberVO);
+  public int update(MemberVO memberVO) {
+    int cnt = this.memberDAO.update(memberVO);
     return cnt;
   }
 
   /**
    * name 수정
-   */
+   *
   @Override
   public int update_name(MemberVO memberVO) {
     int cnt = this.memberDAO.update_name(memberVO);
@@ -135,7 +135,7 @@ public class MemberProc implements MemberProcInter {
 
   /**
    * nickname 수정
-   */
+   *
   @Override
   public int update_nickname(MemberVO memberVO) {
     int cnt = this.memberDAO.update_nickname(memberVO);
@@ -144,7 +144,7 @@ public class MemberProc implements MemberProcInter {
 
   /**
    * tel 수정
-   */
+   *
   @Override
   public int update_tel(MemberVO memberVO) {
     int cnt = this.memberDAO.update_tel(memberVO);
@@ -153,7 +153,7 @@ public class MemberProc implements MemberProcInter {
 
   /**
    * zipcode 수정
-   */
+   *
   @Override
   public int update_zipcode(MemberVO memberVO) {
     int cnt = this.memberDAO.update_zipcode(memberVO);
@@ -162,12 +162,13 @@ public class MemberProc implements MemberProcInter {
 
   /**
    * address 수정
-   */
+   *
   @Override
   public int update_address(MemberVO memberVO) {
     int cnt = this.memberDAO.update_address(memberVO);
     return cnt;
   }
+  */
 
   /**
    * 회원 탈퇴 처리(grade 값을 탈퇴로 지정한 99로 변경)
@@ -214,8 +215,5 @@ public class MemberProc implements MemberProcInter {
     int cnt = this.memberDAO.update_passwd(map);
     return cnt;
   }
-
-  
-  
  
 }

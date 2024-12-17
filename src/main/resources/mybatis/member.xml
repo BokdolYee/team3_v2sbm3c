@@ -45,47 +45,52 @@
     ORDER BY grade ASC, id ASC
   </select>
   
+<<<<<<< HEAD
   <!-- 회원 정보 수정(id) -->
   <update id="update_id" parameterType="dev.mvc.member.MemberVO">
+=======
+  <!-- 회원 정보 수정(name, nickname, tel, zipcode, address) -->
+  <update id="update" parameterType="dev.mvc.member.MemberVO">
+>>>>>>> 045512b56109460d45a9d1dcf380127640da0bd1
     UPDATE member 
-    SET id=#{id}
+    SET name=#{name}, nickname=#{nickname}, tel=#{tel}, zipcode=#{zipcode}, address=#{address}
     WHERE memberno=#{memberno}
   </update>
   
-  <!-- 회원 정보 수정(name) -->
+  <!-- 회원 정보 수정(name) 
   <update id="update_name" parameterType="dev.mvc.member.MemberVO">
     UPDATE member
     SET name=#{name}
     WHERE memberno=#{memberno}
   </update>
   
-  <!-- 회원 정보 수정(nickname) -->
+   회원 정보 수정(nickname)
   <update id="update_nickname" parameterType="dev.mvc.member.MemberVO">
     UPDATE member
     SET nickname=#{nickname}
     WHERE memberno=#{memberno}
   </update>
   
-  <!-- 회원 정보 수정(tel) -->
+   회원 정보 수정(tel)
   <update id="update_tel" parameterType="dev.mvc.member.MemberVO">
     UPDATE member
     SET tel=#{tel}
     WHERE memberno=#{memberno}
   </update>
   
-  <!-- 회원 정보 수정(zipcode) -->
+   회원 정보 수정(zipcode)
   <update id="update_zipcode" parameterType="dev.mvc.member.MemberVO">
     UPDATE member
     SET zipcode=#{zipcode}
     WHERE memberno=#{memberno}
   </update>
   
-  <!-- 회원 정보 수정(address) -->
+   회원 정보 수정(address)
   <update id="update_address" parameterType="dev.mvc.member.MemberVO">
     UPDATE member
     SET address=#{address}
     WHERE memberno=#{memberno}
-  </update>
+  </update> -->
   
   <!-- 회원 탈퇴(보통 db에서 없애지 않고 등급이나 상태를 바꿔 로그인 못 하게 함 - 소프트 삭제 방식)-->
   <delete id="withdraw" parameterType="dev.mvc.member.MemberVO">
@@ -97,7 +102,7 @@
   <!-- 로그인, 1: 로그인 성공, 0: 로그인 실패 메세지 출력-->
   <select id="login" resultType="int" parameterType="HashMap">
     SELECT COUNT(memberno) as cnt
-    FROM member
+    FROM member 
     WHERE id=#{id} AND passwd=#{passwd}
   </select>
   

@@ -120,7 +120,24 @@ public class MemberCont {
       model.addAttribute("cnt", 0);
     }
     
-    return "/member/msg";
+    return "/member/login";
+  }
+  
+  
+  @GetMapping(value="/list")
+  public String list(Model model, HttpSession session) {
+    if (this.memberProc.isAdmin(session)) {
+      //ArrayList<BurgerVOMenu> menu = this.burgerProc.menu();
+      //model.addAttribute("menu", menu);
+      
+      ArrayList<MemberVO> list = this.memberProc.list();
+      
+      model.addAttribute("list", list);
+      
+      return "/member/list";  // templates/member/list.html
+    } else {
+      return "redirect:/member/login_cookie_need"; // redirect
+    }
   }
   
   
@@ -169,41 +186,114 @@ public class MemberCont {
       
       return "member/read";  // templates/member/read.html
     } else {
+<<<<<<< HEAD
+=======
       return "redirect:/member/login_cookie_need";  // redirect
     }
     
   }
   
   /**
-   * id 수정 처리
+   * 회원 정보 수정 폼 
+   * @param session
+   * @param model
+   * @param memberno
+   * @return
+   */
+  @GetMapping(value="/update")
+  public String update_form(HttpSession session, Model model, int memberno) {
+    // 회원은 회원 등급만 처리, 관리자: 1 ~ 10, 회원: 11 ~ 20
+    String grade = (String)session.getAttribute("grade"); // 등급: admin, member
+    
+    // 회원: member && 11 ~ 20
+    if (grade.equals("member") &&  memberno == (int)session.getAttribute("memberno")) {
+      System.out.println("memberno: " + memberno);
+      
+      MemberVO memberVO = this.memberProc.read(memberno);
+      model.addAttribute("memberVO", memberVO);
+      
+      return "member/update";  // templates/member/read.html
+      
+    } else if (grade.equals("admin")) { // 관리자 1~10
+      System.out.println("-> memberno: " + memberno);
+      
+      MemberVO memberVO = this.memberProc.read(memberno);
+      model.addAttribute("memberVO", memberVO);
+      
+      return "member/update";  // templates/member/update.html
+    } else {
+>>>>>>> 045512b56109460d45a9d1dcf380127640da0bd1
+      return "redirect:/member/login_cookie_need";  // redirect
+    }
+    
+  }
+  
+  /**
+   * 회원 정보 수정 처리(비밀번호 제외)
    * @param session
    * @param model
    * @param memberVO
    * @return
    */
+<<<<<<< HEAD
   @PostMapping(value="/update_id")
   public String update_id_proc(HttpSession session, Model model, @ModelAttribute("memberVO")MemberVO memberVO) {
+=======
+  @PostMapping(value="/update")
+  public String update_proc(HttpSession session, Model model, @ModelAttribute("memberVO")MemberVO memberVO) {
+>>>>>>> 045512b56109460d45a9d1dcf380127640da0bd1
     String grade = (String)session.getAttribute("grade");
     
     // 회원 본인이거나 관리자 본인인 경우에 처리
     if ((grade.equals("member") &&  memberVO.getMemberno() == (int)session.getAttribute("memberno"))
       || (grade.equals("admin") && memberVO.getMemberno() == (int)session.getAttribute("memberno"))) {
+<<<<<<< HEAD
       int cnt = this.memberProc.update_id(memberVO);
+=======
+      int cnt = this.memberProc.update(memberVO);
+>>>>>>> 045512b56109460d45a9d1dcf380127640da0bd1
       
       if (cnt == 1) {
-        model.addAttribute("code", "update_id_success");
+        model.addAttribute("code", "update_success");
         model.addAttribute("memberno", memberVO.getMemberno());
-        model.addAttribute("id", memberVO.getId());
+        model.addAttribute("name", memberVO.getName());
+        model.addAttribute("nickname", memberVO.getNickname());
+        model.addAttribute("tel", memberVO.getTel());
+        model.addAttribute("zipcode", memberVO.getZipcode());
+        model.addAttribute("address", memberVO.getAddress());
       } else {
-        model.addAttribute("code", "update_id_fail");
+        model.addAttribute("code", "update_fail");
       }
       
       model.addAttribute("cnt", cnt);
       
-      return "redirect:/member/read"; // /templates/member/msg.html
+      return "redirect:/member/read"; // /templates/member/read.html
       } else {
       return "redirect:/member/login_cookie_need";  // redirect
     }
+  }
+  
+  /**
+   * 패스워드 수정 폼
+   * @param model
+   * @param memberno
+   * @return
+   */
+  @GetMapping(value="/update_passwd")
+  public String update_passwd_form(HttpSession session, Model model) {
+    if(this.memberProc.isMember(session)) {
+      int memberno = (int)session.getAttribute("memberno"); // session에서 가져오기
+      
+      MemberVO memberVO = this.memberProc.read(memberno);
+      
+      model.addAttribute("memberVO", memberVO);
+      
+      return "member/update_passwd"; // /tamplates/member/pass_update.html
+    } else {
+      return "redirect:/member/login_cookie_need";
+    }
+    
+     
   }
   
   /**
@@ -324,7 +414,11 @@ public class MemberCont {
    * @param model
    * @param memberVO
    * @return
+<<<<<<< HEAD
    */
+=======
+   *
+>>>>>>> 045512b56109460d45a9d1dcf380127640da0bd1
   @PostMapping(value="/update_name")
   public String update_name_proc(HttpSession session, Model model, @ModelAttribute("memberVO")MemberVO memberVO) {
     String grade = (String)session.getAttribute("grade");
@@ -356,7 +450,11 @@ public class MemberCont {
    * @param model
    * @param memberVO
    * @return
+<<<<<<< HEAD
    */
+=======
+   *
+>>>>>>> 045512b56109460d45a9d1dcf380127640da0bd1
   @PostMapping(value="/update_nickname")
   public String update_nickname_proc(HttpSession session, Model model, @ModelAttribute("memberVO")MemberVO memberVO) {
     String grade = (String)session.getAttribute("grade");
@@ -388,7 +486,11 @@ public class MemberCont {
    * @param model
    * @param memberVO
    * @return
+<<<<<<< HEAD
    */
+=======
+   *
+>>>>>>> 045512b56109460d45a9d1dcf380127640da0bd1
   @PostMapping(value="/update_tel")
   public String update_tel_proc(HttpSession session, Model model, @ModelAttribute("memberVO")MemberVO memberVO) {
     String grade = (String)session.getAttribute("grade");
@@ -420,7 +522,11 @@ public class MemberCont {
    * @param model
    * @param memberVO
    * @return
+<<<<<<< HEAD
    */
+=======
+   *
+>>>>>>> 045512b56109460d45a9d1dcf380127640da0bd1
   @PostMapping(value="/update_zipcode")
   public String update_zipcode_proc(HttpSession session, Model model, @ModelAttribute("memberVO")MemberVO memberVO) {
     String grade = (String)session.getAttribute("grade");
@@ -452,7 +558,11 @@ public class MemberCont {
    * @param model
    * @param memberVO
    * @return
+<<<<<<< HEAD
    */
+=======
+   *
+>>>>>>> 045512b56109460d45a9d1dcf380127640da0bd1
   @PostMapping(value="/update_address")
   public String update_address_proc(HttpSession session, Model model, @ModelAttribute("memberVO")MemberVO memberVO) {
     String grade = (String)session.getAttribute("grade");
@@ -477,6 +587,7 @@ public class MemberCont {
       return "redirect:/member/login_cookie_need";  // redirect
     }
   }
+  */
   
   /**
    * 회원 탈퇴 처리
@@ -551,7 +662,11 @@ public class MemberCont {
     model.addAttribute("ck_passwd", check_passwd);
     model.addAttribute("ck_passwd_save", check_passwd_save);
     
+<<<<<<< HEAD
     return "/member/login_cookie";  // templates/member/login_cookie.html
+=======
+    return "/member/login";  // templates/member/login_cookie.html
+>>>>>>> 045512b56109460d45a9d1dcf380127640da0bd1
   }
   
   /**
