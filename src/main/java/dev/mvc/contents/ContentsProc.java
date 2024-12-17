@@ -13,7 +13,7 @@ import dev.mvc.tool.Tool;
 
 @Component("dev.mvc.contents.ContentsProc")
 public class ContentsProc implements ContentsProcInter {
-  @Autowired
+  
   Security security;
 
   @Autowired // ContentsDAOInter interface를 구현한 클래스의 객체를 만들어 자동으로 할당해라.

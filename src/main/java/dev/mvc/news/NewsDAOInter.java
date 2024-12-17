@@ -5,6 +5,9 @@ import java.util.Map;
 
 public interface NewsDAOInter {
   
+  NewsVO read(int newsno);
+  int update(NewsVO newsVO);
+  
   /**
    * <pre>
    * MyBATIS: insert id="create" parameterType="dev.mvc.news.newsVO"
@@ -18,19 +21,6 @@ public interface NewsDAOInter {
    */
   public int create(NewsVO newsVO);
 
-  /**
-   * 조회
-   * @param newsno
-   * @return
-   */
-  public NewsVO read(Integer newsno);
-
-  /**
-   * 수정
-   * @param newsVO
-   * @return
-   */
-  public int update(NewsVO newsVO);
 
   /**
    * 삭제
@@ -55,4 +45,6 @@ public interface NewsDAOInter {
    */
   public ArrayList<NewsVO> listPaging(Map<String, Object> param); 
 
+  
+  
 }

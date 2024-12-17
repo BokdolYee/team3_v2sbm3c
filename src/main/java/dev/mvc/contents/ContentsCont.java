@@ -62,7 +62,7 @@ public class ContentsCont {
     model.addAttribute("word", word);
     model.addAttribute("now_page", now_page);
     
-    if (this.memberProc.isMemberAdmin(session)) {
+    if (this.memberProc.isAdmin(session)) {
       NewsCateVO newscateVO = this.newscateProc.read(newscateno);//  카테고리 정보를 출력하기위한 목적
       model.addAttribute("newscateVO", newscateVO);
 

@@ -1,5 +1,6 @@
 package dev.mvc.member;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public interface MemberDAOInter {
@@ -23,6 +24,12 @@ public interface MemberDAOInter {
    * @return
    */
   public int create(MemberVO memberVO);
+  
+  /**
+   * 회원 전체 목록
+   * @return
+   */
+  public ArrayList<MemberVO> list();
   
   /**
    * memberno로 회원 정보 조회

@@ -16,7 +16,6 @@ public class NewsVO {
 
     /** 뉴스 텍스트 */
     @NotEmpty(message = "텍스트는 필수 입력 항목입니다.")
-    @Size(min = 1, max = 3000, message = "텍스트의 입력 글자 수는 최대 3000자이어야 합니다.")
     private String text;
 
     /** URL */

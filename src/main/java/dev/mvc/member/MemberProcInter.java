@@ -1,5 +1,6 @@
 package dev.mvc.member;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import jakarta.servlet.http.HttpSession;
 
@@ -26,6 +27,12 @@ public interface MemberProcInter {
   public int create(MemberVO memberVO);
   
   /**
+   * 회원 전체 목록
+   * @return
+   */
+  public ArrayList<MemberVO> list();
+  
+  /**
    * memberno로 회원 정보 조회
    * @param memberno
    * @return
@@ -45,6 +52,13 @@ public interface MemberProcInter {
    * @return true: 사용자
    */
   public boolean isMember(HttpSession session);
+  
+  /**
+   * 로그인된 관리자 계정인지 검사
+   * @param session
+   * @return true: 관리자
+   */
+  public boolean isAdmin(HttpSession session);
 
   /**
    * id 수정 처리

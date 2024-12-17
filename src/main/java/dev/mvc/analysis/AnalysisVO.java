@@ -18,7 +18,7 @@ public class AnalysisVO {
     @Size(max = 300, message = "영향의 입력 글자 수는 최대 300자이어야 합니다.")
     private String impact;
 
-    /** 요약 번호 (외래 키) */
+    /** 뉴스 본문 번호 (외래 키) */
     @NotNull(message = "요약 번호는 필수 입력 항목입니다.")
-    private Integer summaryno = 0;
+    private Integer newsno = 0;
 }

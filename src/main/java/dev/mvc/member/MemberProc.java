@@ -1,5 +1,6 @@
 package dev.mvc.member;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,7 +15,6 @@ public class MemberProc implements MemberProcInter {
   @Autowired
   private MemberDAOInter memberDAO;
   
-  @Autowired
   Security security;
   
   public MemberProc(){
@@ -52,6 +52,15 @@ public class MemberProc implements MemberProcInter {
     int cnt = this.memberDAO.create(memberVO);
     return cnt;
   }
+  
+  /**
+   * 회원 목록
+   */
+  @Override
+  public ArrayList<MemberVO> list() {
+    ArrayList<MemberVO> list = this.memberDAO.list();
+    return list;
+  }
 
   /**
    * memberno로 회원 정보 조회
@@ -86,6 +95,24 @@ public class MemberProc implements MemberProcInter {
     }
     
     return examine;
+  }
+  
+  /**
+   * 관리자인지 검사
+   */  
+  @Override
+  public boolean isAdmin(HttpSession session){
+    boolean sw = false; // 로그인하지 않은 것으로 초기화
+//    String grade = (String)session.getAttribute("grade");
+//    
+//    if (grade != null) {
+//      if (grade.equals("admin")) {
+//        sw = true;  // 로그인 한 경우
+//      }      
+//    }
+//    
+    sw = true;  // 테스트를 위한 임시 true
+    return sw;
   }
 
   /**
